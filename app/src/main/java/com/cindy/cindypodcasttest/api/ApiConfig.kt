@@ -1,4 +1,4 @@
-package com.cindy.cindypodcasttest.Retrofit
+package com.cindy.cindypodcasttest.api
 
 class ApiConfig {
 

@@ -1,9 +1,11 @@
-package com.cindy.cindypodcasttest.Retrofit
+package com.cindy.cindypodcasttest.api
 
 import android.util.Log
 import com.cindy.cindypodcasttest.BuildConfig
-import com.cindy.cindypodcasttest.Model.CastDetailModel
-import com.cindy.cindypodcasttest.Model.CastModel
+import com.cindy.cindypodcasttest.model.CastDetailModel
+import com.cindy.cindypodcasttest.model.CastModel
+import com.cindy.cindypodcasttest.retrofit.GetCast
+import com.cindy.cindypodcasttest.retrofit.GetCastDetail
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -51,7 +53,8 @@ class ApiController {
         if(BuildConfig.DEBUG)Log.v(TAG, "===== getCast =====")
         val retrofit: Retrofit? = createRetrofit(url)
         if(retrofit!=null){
-            val apiService: GetCast.ApiService = retrofit.create(GetCast.ApiService::class.java)
+            val apiService: GetCast.ApiService = retrofit.create(
+                GetCast.ApiService::class.java)
             val call: Call<CastModel> = apiService.getCast()
             call.enqueue(callback)
         }else{
@@ -63,7 +66,8 @@ class ApiController {
         if(BuildConfig.DEBUG)Log.v(TAG, "===== getCast =====")
         val retrofit: Retrofit? = createRetrofit(url)
         if(retrofit!=null){
-            val apiService: GetCastDetail.ApiService = retrofit.create(GetCastDetail.ApiService::class.java)
+            val apiService: GetCastDetail.ApiService = retrofit.create(
+                GetCastDetail.ApiService::class.java)
             val call: Call<CastDetailModel> = apiService.getCastDetail()
             call.enqueue(callback)
         }else{

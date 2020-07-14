@@ -1,6 +1,6 @@
-package com.cindy.cindypodcasttest.Retrofit
+package com.cindy.cindypodcasttest.retrofit
 
-import com.cindy.cindypodcasttest.Model.CastModel
+import com.cindy.cindypodcasttest.model.CastModel
 import retrofit2.Call
 import retrofit2.http.GET
 

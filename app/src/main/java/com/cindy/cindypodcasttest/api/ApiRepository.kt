@@ -1,9 +1,7 @@
-package com.cindy.cindypodcasttest
+package com.cindy.cindypodcasttest.api
 
-import com.cindy.cindypodcasttest.Model.CastDetailModel
-import com.cindy.cindypodcasttest.Model.CastModel
-import com.cindy.cindypodcasttest.Retrofit.ApiConfig
-import com.cindy.cindypodcasttest.Retrofit.ApiController
+import com.cindy.cindypodcasttest.model.CastDetailModel
+import com.cindy.cindypodcasttest.model.CastModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

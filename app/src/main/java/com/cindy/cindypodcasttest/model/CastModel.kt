@@ -1,7 +1,7 @@
-package com.cindy.cindypodcasttest.Model
+package com.cindy.cindypodcasttest.model
 
 data class CastModel(
-    var castData: CastData? = null
+    var data: CastData? = null
 )
 
 data class CastData(

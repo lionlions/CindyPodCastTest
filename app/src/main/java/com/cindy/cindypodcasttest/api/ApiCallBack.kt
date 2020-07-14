@@ -1,7 +1,7 @@
-package com.cindy.cindypodcasttest
+package com.cindy.cindypodcasttest.api
 
-import com.cindy.cindypodcasttest.Model.CastDetailModel
-import com.cindy.cindypodcasttest.Model.CastModel
+import com.cindy.cindypodcasttest.model.CastDetailModel
+import com.cindy.cindypodcasttest.model.CastModel
 
 interface ApiCallBack {
     fun onCastCallbackDone(castModel: CastModel){}
