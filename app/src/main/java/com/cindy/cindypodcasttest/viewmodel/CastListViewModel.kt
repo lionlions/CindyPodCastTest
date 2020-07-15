@@ -1,26 +1,26 @@
 package com.cindy.cindypodcasttest.viewmodel
 
+import android.content.Context
+import android.content.Intent
 import android.util.Log
+import android.view.View
+import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
 import com.cindy.cindypodcasttest.api.ApiCallBack
 import com.cindy.cindypodcasttest.api.ApiRepository
 import com.cindy.cindypodcasttest.model.CastDetailModel
 import com.cindy.cindypodcasttest.model.CastModel
 import com.cindy.cindypodcasttest.model.Podcast
+import com.cindy.cindypodcasttest.view.CastDetailActivity
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val mRepository: ApiRepository): ViewModel() {
+class CastListViewModel(private val mRepository: ApiRepository): ViewModel() {
 
     private val TAG: String = javaClass.simpleName
 
     var mCastLiveData: MutableLiveData<List<Podcast>> = MutableLiveData()
     val isCastEmpty: LiveData<Boolean> = Transformations.map(mCastLiveData){
         it.isNullOrEmpty()
-    }
-
-    var mCastDetailLiveData: MutableLiveData<CastDetailModel> = MutableLiveData()
-    val isCastDetailEmpty: LiveData<Boolean> = Transformations.map(mCastDetailLiveData){
-        it==null || it.data?.collection?.contentFeed?.isNullOrEmpty()!!
     }
 
     var mErrorMessageLiveData: MutableLiveData<String> = MutableLiveData()
@@ -53,18 +53,12 @@ class MainViewModel(private val mRepository: ApiRepository): ViewModel() {
         })
     }
 
-    fun getCastDetailData(){
-        mRepository.callGetCast(object:
-            ApiCallBack {
-            override fun onCastDetailCallbackDone(castDetailModel: CastDetailModel) {
-                viewModelScope.launch {
-                    mCastDetailLiveData.value = castDetailModel
-                }
-            }
-            override fun onApiFailed(errorMessage: String?) {
-                mErrorMessageLiveData.value = errorMessage
-            }
-        })
+    fun onItemClick(view: View, id: String){
+        //Go to next cast detail activity
+        val context: Context = view.context
+        var intent: Intent = Intent()
+        intent.setClass(context, CastDetailActivity::class.java)
+        context.startActivity(intent)
     }
 
 }

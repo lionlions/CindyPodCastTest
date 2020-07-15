@@ -8,8 +8,13 @@ class ViewModelFactory(private val repository: ApiRepository): ViewModelProvider
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         modelClass.run {
             when{
-                isAssignableFrom(MainViewModel::class.java) -> {
-                    return MainViewModel(
+                isAssignableFrom(CastListViewModel::class.java) -> {
+                    return CastListViewModel(
+                        repository
+                    ) as T
+                }
+                isAssignableFrom(CastDetailViewModel::class.java) -> {
+                    return CastDetailViewModel(
                         repository
                     ) as T
                 }

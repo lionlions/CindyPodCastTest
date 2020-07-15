@@ -3,13 +3,12 @@ package com.cindy.cindypodcasttest.view
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.cindy.cindypodcasttest.model.Podcast
-import com.cindy.cindypodcasttest.viewmodel.MainViewModel
+import com.cindy.cindypodcasttest.viewmodel.CastListViewModel
 import com.cindy.cindypodcasttest.databinding.ItemCastBinding
 
-class CastAdapter(private val mViewModel: MainViewModel): RecyclerView.Adapter<CastAdapter.ViewHolder>() {
+class CastAdapter(private val mViewModel: CastListViewModel): RecyclerView.Adapter<CastAdapter.ViewHolder>() {
 
     private val TAG: String = javaClass.simpleName
 
@@ -39,7 +38,8 @@ class CastAdapter(private val mViewModel: MainViewModel): RecyclerView.Adapter<C
                 return ViewHolder(binding)
             }
         }
-        fun bind(viewModel: MainViewModel, podcast: Podcast){
+        fun bind(viewModel: CastListViewModel, podcast: Podcast){
+            mBinding.viewModel = viewModel
             mBinding.podcast = podcast
             mBinding.executePendingBindings()
         }

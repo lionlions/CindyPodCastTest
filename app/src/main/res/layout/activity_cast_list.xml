@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.cindy.cindypodcasttest.viewmodel.MainViewModel" />
+            type="com.cindy.cindypodcasttest.viewmodel.CastListViewModel" />
     </data>
 
     <LinearLayout

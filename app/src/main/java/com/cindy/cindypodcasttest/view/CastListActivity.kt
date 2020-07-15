@@ -8,16 +8,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.cindy.cindypodcasttest.api.ApiRepository
 import com.cindy.cindypodcasttest.R
-import com.cindy.cindypodcasttest.viewmodel.MainViewModel
+import com.cindy.cindypodcasttest.databinding.ActivityCastListBinding
+import com.cindy.cindypodcasttest.viewmodel.CastListViewModel
 import com.cindy.cindypodcasttest.viewmodel.ViewModelFactory
-import com.cindy.cindypodcasttest.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class CastListActivity : AppCompatActivity() {
 
     private val TAG: String = javaClass.simpleName
     private lateinit var mAdapter: CastAdapter
-    private lateinit var mMainViewModel: MainViewModel
-    private lateinit var mViewDataBinding: ActivityMainBinding
+    private lateinit var mCastListViewModel: CastListViewModel
+    private lateinit var mViewDataBinding: ActivityCastListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,30 +26,29 @@ class MainActivity : AppCompatActivity() {
         processRecyclerView()
         processViewModel()
 
-
     }
 
     fun processViewDataBinding() {
-        mViewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        mMainViewModel = ViewModelProvider(
+        mViewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_cast_list)
+        mCastListViewModel = ViewModelProvider(
             this,
             ViewModelFactory(ApiRepository())
-        ).get(MainViewModel::class.java)
+        ).get(CastListViewModel::class.java)
         mViewDataBinding.run {
-            viewModel = mMainViewModel
-            lifecycleOwner = this@MainActivity
+            viewModel = mCastListViewModel
+            lifecycleOwner = this@CastListActivity
         }
     }
 
     fun processRecyclerView() {
-        mAdapter = CastAdapter(mMainViewModel)
+        mAdapter = CastAdapter(mCastListViewModel)
         mViewDataBinding.vCastList.adapter = mAdapter
     }
 
     fun processViewModel(){
-        mMainViewModel.mCastLiveData.observe(this, Observer {
+        mCastListViewModel.mCastLiveData.observe(this, Observer {
             Log.i(TAG, "mCastLiveData observer done!!")
-            Log.w(TAG, "it: ${mMainViewModel.mCastLiveData.value}")
+            Log.w(TAG, "it: ${mCastListViewModel.mCastLiveData.value}")
             mAdapter.notifyDataSetChanged()
         })
     }

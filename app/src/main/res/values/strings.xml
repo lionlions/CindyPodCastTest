@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">CindyPodCastTest</string>
     <string name="main_page_title">Casts</string>
+    <string name="all_episodes">ALL EPISODES</string>
 </resources>
