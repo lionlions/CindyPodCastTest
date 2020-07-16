@@ -1,4 +1,12 @@
 package com.cindy.cindypodcasttest.model
+
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DecodeFormat
+import com.bumptech.glide.request.RequestOptions
+import com.cindy.cindypodcasttest.R
+
 data class CastDetailModel(
     var data: CastDetailData? = null
 )
@@ -19,7 +27,30 @@ data class Collection(
     var genreIds: String? = null,
     var genres: String? = null,
     var releaseDate: String? = null
-)
+){
+    companion object {
+
+        @JvmStatic
+        @BindingAdapter("collectionImage")
+        fun loadImage(imageView: ImageView, url: String?) {
+            if(url!=null){
+                Glide.with(imageView.context)
+                    .applyDefaultRequestOptions(
+                        RequestOptions().fitCenter().format(DecodeFormat.PREFER_RGB_565)
+                    )
+                    .load(url)
+                    .into(imageView)
+            }else{
+                Glide.with(imageView.context)
+                    .applyDefaultRequestOptions(
+                        RequestOptions().fitCenter().format(DecodeFormat.PREFER_RGB_565)
+                    )
+                    .load(R.drawable.ic_baseline_broken_image_24)
+                    .into(imageView)
+            }
+        }
+    }
+}
 
 data class ContentFeed(
     var contentUrl: String? = null,

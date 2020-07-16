@@ -29,7 +29,7 @@ class CastDetailViewModel(private val mRepository: ApiRepository): ViewModel() {
     }
 
     fun getCastDetailData(){
-        mRepository.callGetCast(object:
+        mRepository.callGetCastDetail(object:
             ApiCallBack {
             override fun onCastDetailCallbackDone(castDetailModel: CastDetailModel) {
                 viewModelScope.launch {

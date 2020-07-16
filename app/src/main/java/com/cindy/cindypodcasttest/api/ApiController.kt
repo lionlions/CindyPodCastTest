@@ -63,7 +63,7 @@ class ApiController {
     }
 
     fun getCastDetail(url: String?, callback: Callback<CastDetailModel>) {
-        if(BuildConfig.DEBUG)Log.v(TAG, "===== getCast =====")
+        if(BuildConfig.DEBUG)Log.v(TAG, "===== getCastDetail =====")
         val retrofit: Retrofit? = createRetrofit(url)
         if(retrofit!=null){
             val apiService: GetCastDetail.ApiService = retrofit.create(

@@ -31,7 +31,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp"
+            android:padding="20dp"
             tools:context=".view.CastDetailActivity"
             android:visibility="@{viewModel.isCastDetailNull() ? View.GONE : View.VISIBLE}">
 
@@ -42,13 +42,14 @@
                 android:background="#123456"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/vCollectionName"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:collectionImage="@{collection.artworkUrl100}"/>
 
             <TextView
                 android:id="@+id/vCollectionName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="20dp"
                 android:text="@{collection.collectionName}"
                 android:textColor="@android:color/white"
                 android:textSize="20dp"
@@ -63,7 +64,7 @@
                 android:id="@+id/vArtistName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="20dp"
                 android:text="@{collection.artistName}"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="15dp"
@@ -77,7 +78,7 @@
                 android:id="@+id/all_episode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/all_episodes"
                 android:textColor="@android:color/white"
                 android:textSize="15dp"
@@ -89,8 +90,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:visibility="@{viewModel.isContentFeedEmpty() ? View.GONE : View.VISIBLE}"
-                android:layout_marginTop="10dp"
-                android:background="#678678"
+                android:layout_marginTop="20dp"
+                tools:listitem="@layout/item_cast_detail"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"

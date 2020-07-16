@@ -7,7 +7,7 @@ import retrofit2.http.GET
 class GetCastDetail {
 
     interface ApiService{
-        @GET("getcastsdetail")
+        @GET("getcastdetail")
         fun getCastDetail(): Call<CastDetailModel>
     }
 
