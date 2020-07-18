@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.cindy.cindypodcasttest.BuildConfig
 import com.cindy.cindypodcasttest.api.ApiRepository
 import com.cindy.cindypodcasttest.R
 import com.cindy.cindypodcasttest.databinding.ActivityCastListBinding
@@ -47,8 +48,7 @@ class CastListActivity : AppCompatActivity() {
 
     fun processViewModel(){
         mCastListViewModel.mCastLiveData.observe(this, Observer {
-            Log.i(TAG, "mCastLiveData observer done!!")
-            Log.w(TAG, "it: ${mCastListViewModel.mCastLiveData.value}")
+            if(BuildConfig.DEBUG)Log.i(TAG, "mCastLiveData observer done!!")
             mAdapter.notifyDataSetChanged()
         })
     }

@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.cindy.cindypodcasttest.BuildConfig
 import com.cindy.cindypodcasttest.R
 import com.cindy.cindypodcasttest.api.ApiRepository
 import com.cindy.cindypodcasttest.databinding.ActivityCastDetailBinding
@@ -60,15 +61,22 @@ class CastDetailActivity : AppCompatActivity() {
     }
 
     fun processViewModel(){
-        mCastDetailViewModel.mContentFeed.observe(this, Observer {
-            Log.i(TAG, "mCastDetailViewModel observer done!!")
-            mAdapter.notifyDataSetChanged()
-        })
-        mCastDetailViewModel.mCastDetailLiveData.observe(this, Observer {
-            Collection.loadImage(vCollectionImage, it.artworkUrl100)
-            vCollectionName.setText(it.collectionName)
-            vArtistName.setText(it.artistName)
-        })
+        mCastDetailViewModel?.run {
+            mContentFeed.observe(this@CastDetailActivity, Observer {
+                if(BuildConfig.DEBUG)Log.i(TAG, "mCastDetailViewModel observer done!!")
+                mAdapter.notifyDataSetChanged()
+            })
+            mCastDetailLiveData.observe(this@CastDetailActivity, Observer {
+                Collection.loadImage(vCollectionImage, it.artworkUrl100)
+                vCollectionName.setText(it.collectionName)
+                vArtistName.setText(it.artistName)
+            })
+            isBackClick.observe(this@CastDetailActivity, Observer {
+                if(it){
+                    finish()
+                }
+            })
+        }
     }
 
 }

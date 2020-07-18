@@ -3,13 +3,23 @@
 
     <data>
         <variable
+            name="viewModel"
+            type="com.cindy.cindypodcasttest.viewmodel.CastDetailViewModel" />
+        <variable
+            name="collection"
+            type="com.cindy.cindypodcasttest.model.Collection" />
+        <variable
             name="contentFeed"
             type="com.cindy.cindypodcasttest.model.ContentFeed" />
+        <variable
+            name="position"
+            type="Integer" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{(view) -> viewModel.onItemClick(view, collection, position)}">
 
         <TextView
             android:id="@+id/vTitle"

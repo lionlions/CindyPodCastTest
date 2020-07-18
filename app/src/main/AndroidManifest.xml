@@ -11,9 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.PodcastPlayer"></activity>
-        <activity android:name=".view.CastDetailActivity" />
-        <activity android:name=".view.CastListActivity">
+        <activity
+            android:name=".view.CastPlayerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.CastDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.CastListActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
+import com.cindy.cindypodcasttest.BuildConfig
 import com.cindy.cindypodcasttest.api.ApiCallBack
 import com.cindy.cindypodcasttest.api.ApiRepository
 import com.cindy.cindypodcasttest.model.CastDetailModel
@@ -14,7 +15,7 @@ import com.cindy.cindypodcasttest.model.Podcast
 import com.cindy.cindypodcasttest.view.CastDetailActivity
 import kotlinx.coroutines.launch
 
-class CastListViewModel(private val mRepository: ApiRepository): ViewModel() {
+class CastListViewModel(private val mRepository: ApiRepository?): ViewModel() {
 
     private val TAG: String = javaClass.simpleName
 
@@ -30,17 +31,15 @@ class CastListViewModel(private val mRepository: ApiRepository): ViewModel() {
     }
 
     fun getCastData(){
-        Log.v(TAG, "===== getCastData =====")
-        mRepository.callGetCast(object:
+        if(BuildConfig.DEBUG)Log.v(TAG, "===== getCastData =====")
+        mRepository?.callGetCast(object:
             ApiCallBack {
             override fun onCastCallbackDone(castModel: CastModel) {
-                Log.v(TAG, "===== onCastCallbackDone =====")
+                if(BuildConfig.DEBUG)Log.v(TAG, "===== onCastCallbackDone =====")
                 viewModelScope.launch {
-                    Log.w(TAG, "launch!!")
                     if(castModel.data!=null
                         && !castModel.data!!.podcast.isNullOrEmpty()){
-                        Log.i(TAG, "update value")
-                        Log.w(TAG, "value: ${castModel.data!!.podcast}")
+                        if(BuildConfig.DEBUG)Log.i(TAG, "update value")
                         mCastLiveData.value = castModel.data!!.podcast
                     }
                 }

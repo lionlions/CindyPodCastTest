@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.cindy.cindypodcasttest.BuildConfig
 import com.cindy.cindypodcasttest.model.Podcast
 import com.cindy.cindypodcasttest.viewmodel.CastListViewModel
 import com.cindy.cindypodcasttest.databinding.ItemCastBinding
@@ -17,13 +18,13 @@ class CastAdapter(private val mViewModel: CastListViewModel): RecyclerView.Adapt
     }
 
     override fun getItemCount(): Int {
-        Log.v(TAG, "===== getItemCount =====")
+        if(BuildConfig.DEBUG)Log.v(TAG, "===== getItemCount =====")
         return mViewModel.mCastLiveData.value?.size ?: 0
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.v(TAG, "===== onBindViewHolder =====")
-        Log.i(TAG, "position: $position")
+        if(BuildConfig.DEBUG)Log.v(TAG, "===== onBindViewHolder =====")
+        if(BuildConfig.DEBUG)Log.i(TAG, "position: $position")
         if(mViewModel.mCastLiveData.value!=null){
             val podcast: Podcast = mViewModel.mCastLiveData.value!![position]
             holder.bind(mViewModel, podcast)

@@ -1,18 +1,22 @@
 package com.cindy.cindypodcasttest.viewmodel
 
-import android.util.Log
-import androidx.databinding.BindingAdapter
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.*
 import com.cindy.cindypodcasttest.api.ApiCallBack
 import com.cindy.cindypodcasttest.api.ApiRepository
 import com.cindy.cindypodcasttest.model.*
 import com.cindy.cindypodcasttest.model.Collection
+import com.cindy.cindypodcasttest.view.CastPlayerActivity
 import kotlinx.coroutines.launch
 
-class CastDetailViewModel(private val mRepository: ApiRepository): ViewModel() {
+class CastDetailViewModel(private val mRepository: ApiRepository?): ViewModel() {
 
     private val TAG: String = javaClass.simpleName
 
+    var isBackClick: MutableLiveData<Boolean> = MutableLiveData()
     var mCastDetailLiveData: MutableLiveData<Collection> = MutableLiveData()
     val isCastDetailNull: LiveData<Boolean> = Transformations.map(mCastDetailLiveData){
         it==null
@@ -29,7 +33,7 @@ class CastDetailViewModel(private val mRepository: ApiRepository): ViewModel() {
     }
 
     fun getCastDetailData(){
-        mRepository.callGetCastDetail(object:
+        mRepository?.callGetCastDetail(object:
             ApiCallBack {
             override fun onCastDetailCallbackDone(castDetailModel: CastDetailModel) {
                 viewModelScope.launch {
@@ -47,4 +51,19 @@ class CastDetailViewModel(private val mRepository: ApiRepository): ViewModel() {
             }
         })
     }
+
+    fun onItemClick(view: View, collection: Collection, position: Int){
+        //Go to cast player activity
+        val context: Context = view.context
+        var intent: Intent = Intent()
+        intent.setClass(context, CastPlayerActivity::class.java)
+        intent.putExtra("position", position)
+        intent.putExtra("collection", collection)
+        context.startActivity(intent)
+    }
+
+    fun onBackClick(view: View){
+        isBackClick.value = true
+    }
+
 }
